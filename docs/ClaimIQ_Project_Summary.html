@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ClaimIQ — Project Summary Document</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --navy: #0f172a;
+    --indigo: #6366f1;
+    --indigo-light: #e0e7ff;
+    --emerald: #10b981;
+    --amber: #f59e0b;
+    --danger: #ef4444;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: white;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  /* Cover page */
+  .cover {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px;
+    page-break-after: always;
+  }
+  .cover-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--indigo);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .cover-title {
+    font-size: 52px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .cover-title span { color: var(--indigo); }
+  .cover-subtitle {
+    font-size: 20px;
+    font-weight: 300;
+    color: #94a3b8;
+    margin-bottom: 60px;
+  }
+  .cover-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--indigo);
+    margin-bottom: 48px;
+  }
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 600px;
+  }
+  .cover-meta-item label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #475569;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cover-meta-item span {
+    font-size: 14px;
+    color: #cbd5e1;
+    font-weight: 500;
+  }
+  .cover-footer {
+    margin-top: auto;
+    padding-top: 48px;
+    border-top: 1px solid #1e293b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-footer span { font-size: 11px; color: #475569; }
+
+  /* TOC */
+  .toc-page {
+    padding: 64px 80px;
+    page-break-after: always;
+    min-height: 100vh;
+  }
+  .toc-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--indigo);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px dotted var(--border);
+  }
+  .toc-item:last-child { border-bottom: none; }
+  .toc-item-label { font-weight: 500; font-size: 13px; }
+  .toc-item-num { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .toc-sub {
+    padding: 6px 0 6px 20px;
+    border-bottom: 1px dotted #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+  }
+  .toc-sub span:first-child { font-size: 12px; color: var(--muted); }
+  .toc-sub span:last-child { font-size: 11px; color: #94a3b8; }
+
+  /* Content pages */
+  .page {
+    padding: 64px 80px;
+    page-break-before: always;
+  }
+  .page:first-of-type { page-break-before: auto; }
+
+  .section-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--indigo);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-number {
+    font-size: 40px;
+    font-weight: 800;
+    color: #f1f5f9;
+    line-height: 1;
+    margin-bottom: -8px;
+  }
+  .section-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .section-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--indigo-light);
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 28px 0 10px;
+  }
+  h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 20px 0 8px;
+  }
+  p { margin-bottom: 12px; color: var(--text); }
+
+  .lead {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  ul, ol {
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+  li { margin-bottom: 6px; }
+
+  /* Cards / callouts */
+  .callout {
+    background: var(--indigo-light);
+    border-left: 4px solid var(--indigo);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+  .callout-title {
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--indigo);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .callout p { color: #3730a3; margin: 0; font-size: 13px; }
+
+  .warning {
+    background: #fffbeb;
+    border-left: 4px solid var(--amber);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 20px;
+    margin: 16px 0;
+  }
+  .warning p { color: #92400e; margin: 0; }
+
+  /* KPI grid */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .kpi-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .kpi-card-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .kpi-card-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--navy);
+  }
+  .kpi-card-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 12px;
+  }
+  th {
+    background: var(--navy);
+    color: white;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 10px 14px;
+    text-align: left;
+    letter-spacing: 0.5px;
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--bg); }
+  tr:last-child td { border-bottom: none; }
+
+  /* Flowchart */
+  .flow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 32px 0;
+  }
+  .flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+  }
+  .flow-box {
+    background: var(--navy);
+    color: white;
+    border-radius: 10px;
+    padding: 14px 20px;
+    text-align: center;
+    min-width: 140px;
+    flex: 1;
+    max-width: 180px;
+  }
+  .flow-box-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .flow-box-sub {
+    font-size: 10px;
+    color: #94a3b8;
+    line-height: 1.4;
+  }
+  .flow-box.indigo { background: var(--indigo); }
+  .flow-box.emerald { background: var(--emerald); }
+  .flow-box.amber { background: #d97706; }
+  .flow-box.light {
+    background: var(--indigo-light);
+    color: var(--indigo);
+  }
+  .flow-box.light .flow-box-sub { color: #6366f1; }
+  .flow-arrow {
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 300;
+    flex-shrink: 0;
+  }
+  .flow-arrow-down {
+    text-align: center;
+    font-size: 18px;
+    color: var(--muted);
+    padding: 4px 0;
+    line-height: 1;
+  }
+  .flow-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 2px 0;
+  }
+
+  /* Model cards */
+  .model-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 20px 0;
+    break-inside: avoid;
+  }
+  .model-card-header {
+    background: var(--navy);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .model-card-header h3 {
+    color: white;
+    margin: 0;
+    font-size: 15px;
+  }
+  .model-badge {
+    background: var(--indigo);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    letter-spacing: 1px;
+  }
+  .model-card-body { padding: 20px 24px; }
+  .model-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .model-meta-item { }
+  .model-meta-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .model-meta-value { font-size: 12px; color: var(--text); }
+
+  /* Requirement rows */
+  .req-row {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .req-id {
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    background: var(--indigo);
+    border-radius: 4px;
+    padding: 2px 8px;
+    height: fit-content;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .req-body { flex: 1; }
+  .req-title { font-weight: 600; font-size: 13px; margin-bottom: 3px; }
+  .req-desc { font-size: 12px; color: var(--muted); }
+  .req-priority {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    height: fit-content;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .priority-high { background: #fee2e2; color: #dc2626; }
+  .priority-med { background: #fef9c3; color: #ca8a04; }
+  .priority-low { background: #dcfce7; color: #16a34a; }
+
+  /* Page footer */
+  .page-footer {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  /* Discount methodology table */
+  .method-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.5fr;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    align-items: start;
+  }
+  .method-row.header {
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  @media print {
+    body { font-size: 12px; }
+    .cover { min-height: 100vh; }
+    .page { padding: 48px 64px; }
+    .toc-page { padding: 48px 64px; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ COVER ═══════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-tag">Portfolio Project Documentation</div>
+  <div class="cover-title">Claim<span>IQ</span></div>
+  <div class="cover-subtitle">Medicare Part B Drug Spend Intelligence Platform</div>
+  <div class="cover-divider"></div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <label>Document Type</label>
+      <span>Project Summary</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Data Source</label>
+      <span>CMS Medicare Part B</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Coverage Period</label>
+      <span>2024 Q1 – 2025 Q3</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Stack</label>
+      <span>FastAPI · React · Groq</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Models</label>
+      <span>Prophet · Isolation Forest</span>
+    </div>
+    <div class="cover-meta-item">
+      <label>Version</label>
+      <span>1.0 — May 2026</span>
+    </div>
+  </div>
+  <div class="cover-footer">
+    <span>CONFIDENTIAL — PORTFOLIO USE</span>
+    <span>ClaimIQ · Medicare Intelligence Platform</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ TOC ═══════════════════════════════════════ -->
+<div class="toc-page">
+  <div class="toc-title">Table of Contents</div>
+
+  <div class="toc-item">
+    <span class="toc-item-label">1. Executive Summary</span>
+    <span class="toc-item-num">§ 1</span>
+  </div>
+  <div class="toc-sub"><span>Platform overview and value proposition</span><span>§ 1.1</span></div>
+  <div class="toc-sub"><span>Key capabilities and stakeholder impact</span><span>§ 1.2</span></div>
+
+  <div class="toc-item">
+    <span class="toc-item-label">2. Project Background</span>
+    <span class="toc-item-num">§ 2</span>
+  </div>
+  <div class="toc-sub"><span>Medicare Part B context and problem statement</span><span>§ 2.1</span></div>
+  <div class="toc-sub"><span>Dataset description and limitations</span><span>§ 2.2</span></div>
+  <div class="toc-sub"><span>Design philosophy</span><span>§ 2.3</span></div>
+
+  <div class="toc-item">
+    <span class="toc-item-label">3. Business Requirements</span>
+    <span class="toc-item-num">§ 3</span>
+  </div>
+  <div class="toc-sub"><span>Stakeholder needs and objectives</span><span>§ 3.1</span></div>
+  <div class="toc-sub"><span>Functional requirements</span><span>§ 3.2</span></div>
+  <div class="toc-sub"><span>Non-functional requirements</span><span>§ 3.3</span></div>
+
+  <div class="toc-item">
+    <span class="toc-item-label">4. Analytical Requirements</span>
+    <span class="toc-item-num">§ 4</span>
+  </div>
+  <div class="toc-sub"><span>Data engineering requirements</span><span>§ 4.1</span></div>
+  <div class="toc-sub"><span>Model requirements and acceptance criteria</span><span>§ 4.2</span></div>
+  <div class="toc-sub"><span>AI layer requirements</span><span>§ 4.3</span></div>
+
+  <div class="toc-item">
+    <span class="toc-item-label">5. System Architecture &amp; Data Flow</span>
+    <span class="toc-item-num">§ 5</span>
+  </div>
+  <div class="toc-sub"><span>End-to-end architecture overview</span><span>§ 5.1</span></div>
+  <div class="toc-sub"><span>Data pipeline and transformation flow</span><span>§ 5.2</span></div>
+  <div class="toc-sub"><span>API layer design</span><span>§ 5.3</span></div>
+
+  <div class="toc-item">
+    <span class="toc-item-label">6. Model Explanations</span>
+    <span class="toc-item-num">§ 6</span>
+  </div>
+  <div class="toc-sub"><span>Prophet — time series forecasting</span><span>§ 6.1</span></div>
+  <div class="toc-sub"><span>Isolation Forest — anomaly detection</span><span>§ 6.2</span></div>
+  <div class="toc-sub"><span>Linear regression — variance analysis</span><span>§ 6.3</span></div>
+  <div class="toc-sub"><span>WAC-to-ASP discount methodology</span><span>§ 6.4</span></div>
+
+  <div class="toc-item">
+    <span class="toc-item-label">7. Results Summary</span>
+    <span class="toc-item-num">§ 7</span>
+  </div>
+  <div class="toc-sub"><span>Portfolio-level findings</span><span>§ 7.1</span></div>
+  <div class="toc-sub"><span>Model outputs and risk signals</span><span>§ 7.2</span></div>
+  <div class="toc-sub"><span>Recommendations</span><span>§ 7.3</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════ §1 EXECUTIVE SUMMARY ═══════════════════════════════════════ -->
+<div class="page">
+  <div class="section-tag">Section 1</div>
+  <div class="section-number">01</div>
+  <div class="section-title">Executive Summary</div>
+  <div class="section-sub">Platform overview, core capabilities, and stakeholder value</div>
+
+  <p class="lead">
+    ClaimIQ is a full-stack Medicare Part B drug spend intelligence platform built to demonstrate how modern data engineering, machine learning, and AI-powered natural language interfaces can transform raw government claims data into decision-grade financial intelligence — the kind of analysis that currently takes healthcare analytics teams days to produce manually.
+  </p>
+
+  <h3>1.1 Platform Overview</h3>
+  <p>
+    The platform ingests the publicly available CMS Medicare Part B Quarterly Drug Spending dataset — covering 1,759 drug billing records across 2024 (full year, Q1–Q4) and 2025 (partial year, Q1–Q3) — and applies a three-layer analytical stack on top of it:
+  </p>
+  <ul>
+    <li><strong>Machine Learning Layer:</strong> Two models run at startup — a Prophet time series model that projects full-year 2025 spending for the top 20 drugs, and an Isolation Forest anomaly detector that scores all drugs on financial irregularity.</li>
+    <li><strong>Statistical Layer:</strong> A linear regression variance model identifies drugs where 2025 actual spending deviates significantly from what 2024 data would predict — surfacing unexpected cost behaviour beyond simple year-over-year comparison.</li>
+    <li><strong>AI Conversational Layer:</strong> A Groq-powered LLaMA 3.3 70B assistant with full access to the dataset, model outputs, anomaly scores, and forecasts — capable of answering specific CFO-level questions about any drug in the portfolio and generating structured executive briefs on demand.</li>
+  </ul>
+
+  <h3>1.2 Stakeholder Value</h3>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-card-label">Total Dataset Coverage</div>
+      <div class="kpi-card-value">1,759</div>
+      <div class="kpi-card-sub">Drug billing records · 2024–2025</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Models Deployed</div>
+      <div class="kpi-card-value">3</div>
+      <div class="kpi-card-sub">Prophet · Isolation Forest · Linear Regression</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">AI Context Window</div>
+      <div class="kpi-card-value">128K</div>
+      <div class="kpi-card-sub">Tokens · LLaMA 3.3 70B via Groq</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Dashboard Modules</div>
+      <div class="kpi-card-value">5</div>
+      <div class="kpi-card-sub">Dashboard · Variance · Forecast · Anomaly · AI</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">API Endpoints</div>
+      <div class="kpi-card-value">8</div>
+      <div class="kpi-card-sub">REST · FastAPI · Pre-computed cache</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Data Source</div>
+      <div class="kpi-card-value">CMS</div>
+      <div class="kpi-card-sub">Centers for Medicare &amp; Medicaid Services</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-title">CFO-Level Impact Statement</div>
+    <p>ClaimIQ replaces hours of manual Medicare drug spend analysis with a dashboard a health plan CFO can open and immediately act on — with anomaly flags, spend forecasts, variance signals, and an AI analyst that can answer specific questions about any drug in the portfolio.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>ClaimIQ — Medicare Intelligence Platform</span>
+    <span>§1 Executive Summary</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ §2 PROJECT BACKGROUND ═══════════════════════════════════════ -->
+<div class="page">
+  <div class="section-tag">Section 2</div>
+  <div class="section-number">02</div>
+  <div class="section-title">Project Background</div>
+  <div class="section-sub">Medicare Part B context, problem statement, and design rationale</div>
+
+  <h3>2.1 Medicare Part B and the Drug Spend Problem</h3>
+  <p>
+    Medicare Part B covers physician-administered drugs — medications infused or injected in a physician's office, hospital outpatient department, or clinic setting. Unlike Part D (pharmacy-dispensed drugs), Part B drugs are billed directly by the provider and reimbursed by CMS at <strong>Average Sales Price (ASP) plus 6%</strong>. This reimbursement model creates a distinct financial profile: a relatively small number of high-cost biologics and specialty drugs account for an outsized share of total program spend.
+  </p>
+  <p>
+    As of 2024, Medicare Part B drug spending represents one of the fastest-growing components of Medicare expenditure. CMS publishes quarterly drug spending data to enable transparency and oversight — but the raw CSV files require significant analytical work before they yield actionable intelligence. Health plan analysts and pharmacy directors currently spend hours each quarter manually building spreadsheets to answer questions that a well-designed platform can answer in seconds.
+  </p>
+
+  <h3>2.2 Dataset Description</h3>
+  <p>The CMS Medicare Part B Quarterly Drug Spending dataset used in this project contains the following structure:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Column</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Brnd_Name</td><td>String</td><td>Brand name of the drug</td><td>Primary identifier for UI</td></tr>
+      <tr><td>Gnrc_Name</td><td>String</td><td>Generic (chemical) name</td><td>Used in AI context matching</td></tr>
+      <tr><td>HCPCS_Cd</td><td>Integer</td><td>Healthcare billing code</td><td>Unique drug identifier</td></tr>
+      <tr><td>HCPCS_Desc</td><td>String</td><td>Description of the billing code</td><td>Clinical context for AI</td></tr>
+      <tr><td>Year</td><td>String</td><td>"2024 (Q1-Q4)" or "2025 (Q1-Q3)"</td><td>Parsed for temporal analysis</td></tr>
+      <tr><td>Tot_Benes</td><td>Float</td><td>Total Medicare beneficiaries</td><td>Has null values — dropna required</td></tr>
+      <tr><td>Tot_Clms</td><td>Integer</td><td>Total claims filed</td><td>Volume indicator</td></tr>
+      <tr><td>Tot_Spndng</td><td>Float</td><td>Total gross Medicare drug spend ($)</td><td>Primary financial metric</td></tr>
+      <tr><td>Avg_Spnd_Per_Bene</td><td>Float</td><td>Average spend per beneficiary</td><td>Per-patient cost signal</td></tr>
+      <tr><td>Avg_Spnd_Per_Clm</td><td>Float</td><td>Average spend per claim</td><td>Drug pricing tier indicator</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warning">
+    <p><strong>Dataset Limitation:</strong> The CSV contains gross ASP-based spending — it does not include actual rebate amounts, WAC prices, or manufacturer-specific discount data. Any rebate or discount figures shown in the platform are estimates based on published MedPAC aggregate benchmarks and are clearly labelled as such.</p>
+  </div>
+
+  <h3>2.3 Design Philosophy</h3>
+  <p>ClaimIQ was designed around three principles borrowed from professional healthcare analytics practice:</p>
+  <ol>
+    <li><strong>Data before AI:</strong> All machine learning models run on startup against clean, validated data. The AI layer consumes model outputs — it does not replace them. Forecasts, anomaly scores, and variance flags are computed deterministically before any language model sees the data.</li>
+    <li><strong>Transparency over black boxes:</strong> Every metric shown in the dashboard has a documented calculation methodology. Discount rates cite MedPAC; anomaly scores cite the Isolation Forest contamination parameter; forecasts show confidence intervals alongside projections.</li>
+    <li><strong>Operator-first design:</strong> The dashboard is built for a health plan CFO, not a data scientist. Every chart has a plain-English interpretation. The AI assistant refuses off-topic questions and grounds every answer in specific drug names and dollar figures from the dataset.</li>
+  </ol>
+
+  <div class="page-footer">
+    <span>ClaimIQ — Medicare Intelligence Platform</span>
+    <span>§2 Project Background</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ §3 BUSINESS REQUIREMENTS ═══════════════════════════════════════ -->
+<div class="page">
+  <div class="section-tag">Section 3</div>
+  <div class="section-number">03</div>
+  <div class="section-title">Business Requirements Document</div>
+  <div class="section-sub">Stakeholder needs, functional requirements, and acceptance criteria</div>
+
+  <h3>3.1 Stakeholder Needs</h3>
+  <p>The primary audience for ClaimIQ is healthcare analytics decision-makers — specifically pharmacy directors, VP-level finance roles, and CFOs at health plans and PBMs who need to monitor Medicare Part B drug spend at a portfolio level.</p>
+
+  <table>
+    <thead><tr><th>Stakeholder</th><th>Primary Need</th><th>Current Pain Point</th></tr></thead>
+    <tbody>
+      <tr><td>Health Plan CFO</td><td>Immediate visibility into portfolio-level spend trends and risk flags</td><td>Manual Excel analysis takes 1–2 days per quarter</td></tr>
+      <tr><td>Pharmacy Director</td><td>Drug-level anomaly detection and cost-per-claim benchmarking</td><td>No automated flagging — relies on manual review</td></tr>
+      <tr><td>Finance Analyst</td><td>Year-over-year variance analysis with model-based expected spend</td><td>Simple YoY % is insufficient; no regression baseline</td></tr>
+      <tr><td>Strategy Team</td><td>Forward-looking spend projections to inform budget planning</td><td>Forecasts done manually with spreadsheets</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3.2 Functional Requirements</h3>
+
+  <div class="req-row">
+    <span class="req-id">BR-01</span>
+    <div class="req-body">
+      <div class="req-title">Portfolio-Level KPI Dashboard</div>
+      <div class="req-desc">The system shall display total 2024 spend, 2025 YTD spend, year-over-year change percentage, and count of drugs with significant variance flags — updated on each page load from the pre-computed cache.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+
+  <div class="req-row">
+    <span class="req-id">BR-02</span>
+    <div class="req-body">
+      <div class="req-title">Top Drug Spend Ranking</div>
+      <div class="req-desc">The system shall rank and display the top 20 drugs by 2024 gross spend with 2025 comparison, year-over-year change, and estimated market discount — accessible via both chart and table views.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+
+  <div class="req-row">
+    <span class="req-id">BR-03</span>
+    <div class="req-body">
+      <div class="req-title">Automated Variance Flagging</div>
+      <div class="req-desc">The system shall automatically flag drugs with spend changes exceeding ±20% year-over-year as High Increase or High Decrease, and shall additionally provide a model-based signal (above/below/as expected) derived from linear regression.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+
+  <div class="req-row">
+    <span class="req-id">BR-04</span>
+    <div class="req-body">
+      <div class="req-title">Spend Forecasting</div>
+      <div class="req-desc">The system shall project full-year 2025 spend for the top 20 drugs using a time series model, displaying projected spend, growth rate versus 2024, and a confidence interval band.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+
+  <div class="req-row">
+    <span class="req-id">BR-05</span>
+    <div class="req-body">
+      <div class="req-title">Anomaly Detection and Risk Ranking</div>
+      <div class="req-desc">The system shall compute a 0–1 anomaly score for every drug using unsupervised machine learning and expose a filterable, risk-ranked list of flagged drugs with plain-English explanations of why each drug was flagged.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+
+  <div class="req-row">
+    <span class="req-id">BR-06</span>
+    <div class="req-body">
+      <div class="req-title">Natural Language Q&amp;A</div>
+      <div class="req-desc">The system shall provide a conversational interface where users can ask plain-English questions about any drug in the dataset and receive specific, data-grounded answers referencing actual drug names and dollar figures.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+
+  <div class="req-row">
+    <span class="req-id">BR-07</span>
+    <div class="req-body">
+      <div class="req-title">Executive Brief Generation</div>
+      <div class="req-desc">The system shall generate a structured one-page executive brief on demand, covering spend drivers, financial risks, forecast highlights, and recommended actions — formatted for immediate CFO consumption.</div>
+    </div>
+    <span class="req-priority priority-med">MEDIUM</span>
+  </div>
+
+  <div class="req-row">
+    <span class="req-id">BR-08</span>
+    <div class="req-body">
+      <div class="req-title">Market Discount Analysis</div>
+      <div class="req-desc">The system shall display estimated WAC-to-ASP market discounts for the top drugs, tiered by drug category (specialty biologic, brand, generic), with methodology sourced from published MedPAC benchmarks and clearly labelled as estimates.</div>
+    </div>
+    <span class="req-priority priority-med">MEDIUM</span>
+  </div>
+
+  <h3>3.3 Non-Functional Requirements</h3>
+  <table>
+    <thead><tr><th>Category</th><th>Requirement</th><th>Target</th></tr></thead>
+    <tbody>
+      <tr><td>Performance</td><td>All ML models pre-computed at startup; API responses served from cache</td><td>&lt; 200ms per endpoint</td></tr>
+      <tr><td>AI Latency</td><td>Groq LLaMA 3.3 70B response time for Q&amp;A</td><td>&lt; 5 seconds</td></tr>
+      <tr><td>Token Budget</td><td>Total tokens per AI request must stay within free tier TPM limit</td><td>&lt; 10,000 tokens/request</td></tr>
+      <tr><td>Data Integrity</td><td>Null values in Tot_Benes handled before any calculation</td><td>Zero NaN propagation to API</td></tr>
+      <tr><td>Security</td><td>API keys stored in .env only; never committed to version control</td><td>Zero secrets in git history</td></tr>
+      <tr><td>Usability</td><td>Dashboard readable without data science background</td><td>CFO-literate design standard</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>ClaimIQ — Medicare Intelligence Platform</span>
+    <span>§3 Business Requirements</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ §4 ANALYTICAL REQUIREMENTS ═══════════════════════════════════════ -->
+<div class="page">
+  <div class="section-tag">Section 4</div>
+  <div class="section-number">04</div>
+  <div class="section-title">Analytical Requirements</div>
+  <div class="section-sub">Data engineering, model specifications, and AI layer design</div>
+
+  <h3>4.1 Data Engineering Requirements</h3>
+  <p>Before any model can run, the raw CMS CSV must pass through a cleaning and transformation pipeline that produces a reliable analytical base.</p>
+
+  <div class="req-row">
+    <span class="req-id">AR-D1</span>
+    <div class="req-body">
+      <div class="req-title">String Normalisation</div>
+      <div class="req-desc">All string columns must have leading and trailing whitespace stripped at load time to prevent duplicate drug entries and broken merges.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+  <div class="req-row">
+    <span class="req-id">AR-D2</span>
+    <div class="req-body">
+      <div class="req-title">Year-Split and Merge</div>
+      <div class="req-desc">The dataset must be split into df_2024 and df_2025 on the Year column, then inner-merged on HCPCS_Cd to produce a wide-format df_merged containing only drugs present in both years — suffixed _2024 and _2025.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+  <div class="req-row">
+    <span class="req-id">AR-D3</span>
+    <div class="req-body">
+      <div class="req-title">Derived Metrics</div>
+      <div class="req-desc">spend_change_abs, spend_change_pct, cost_per_claim_change_pct, cost_per_bene_change_pct must all be computed on df_merged before any model runs. Variance flags (high_increase / stable / high_decrease) applied at ±20% threshold.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+  <div class="req-row">
+    <span class="req-id">AR-D4</span>
+    <div class="req-body">
+      <div class="req-title">Null Handling</div>
+      <div class="req-desc">Tot_Benes contains null values and must be handled with dropna() before any beneficiary-denominated calculation. NaN and Inf values in float columns must be replaced with None before JSON serialisation.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+
+  <h3>4.2 Model Requirements and Acceptance Criteria</h3>
+  <table>
+    <thead><tr><th>Model</th><th>Input</th><th>Output</th><th>Acceptance Criterion</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Prophet (Forecasting)</td>
+        <td>2 annual data points per drug (2024 actual, 2025 partial annualised)</td>
+        <td>Projected 2025 full-year spend + confidence interval for top 20 drugs</td>
+        <td>All 20 drugs return valid yhat, yhat_lower, yhat_upper with no NaN values</td>
+      </tr>
+      <tr>
+        <td>Isolation Forest (Anomaly)</td>
+        <td>5 features: Tot_Spndng, Tot_Clms, Tot_Benes, Avg_Spnd_Per_Clm, Avg_Spnd_Per_Bene — scaled via StandardScaler</td>
+        <td>Anomaly score 0–1 (inverted decision_function) + is_anomaly flag + plain-English reason for top 5% flagged</td>
+        <td>contamination=0.05 yields exactly 5% flagged; scores are monotonically invertible</td>
+      </tr>
+      <tr>
+        <td>Linear Regression (Variance)</td>
+        <td>Features: Tot_Clms_2024, Avg_Spnd_Per_Clm_2024, Tot_Benes_2024. Target: Tot_Spndng_2025</td>
+        <td>predicted_spend_2025, model_residual, residual_zscore, model_flag (Above/Below/As expected)</td>
+        <td>Residuals are z-scored; |z| &gt; 2 flagged as significant variance from model expectation</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4.3 AI Layer Requirements</h3>
+  <div class="req-row">
+    <span class="req-id">AR-AI1</span>
+    <div class="req-body">
+      <div class="req-title">Keyword-Based Retrieval</div>
+      <div class="req-desc">When a question contains a drug name or HCPCS code, the exact CSV rows for that drug (both years) must be retrieved and injected at the top of the AI context before the general portfolio summary. Matching must be case-insensitive substring search against Brnd_Name and Gnrc_Name.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+  <div class="req-row">
+    <span class="req-id">AR-AI2</span>
+    <div class="req-body">
+      <div class="req-title">Context Budget</div>
+      <div class="req-desc">Total tokens per request must not exceed 10,000 to stay within the Groq free tier 12K TPM limit. Context is capped at top 50 drugs by spend for general questions; specific drug matches are additional but the combined total must remain under budget.</div>
+    </div>
+    <span class="req-priority priority-high">HIGH</span>
+  </div>
+  <div class="req-row">
+    <span class="req-id">AR-AI3</span>
+    <div class="req-body">
+      <div class="req-title">Relevance Gating</div>
+      <div class="req-desc">The system prompt must instruct the model to refuse only questions that are genuinely unrelated to healthcare, drugs, or financial analysis. Questions about any drug in the dataset, Medicare policy, cost trends, or financial risk must always be answered.</div>
+    </div>
+    <span class="req-priority priority-med">MEDIUM</span>
+  </div>
+
+  <div class="page-footer">
+    <span>ClaimIQ — Medicare Intelligence Platform</span>
+    <span>§4 Analytical Requirements</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ §5 ARCHITECTURE ═══════════════════════════════════════ -->
+<div class="page">
+  <div class="section-tag">Section 5</div>
+  <div class="section-number">05</div>
+  <div class="section-title">System Architecture &amp; Data Flow</div>
+  <div class="section-sub">End-to-end pipeline from raw CSV to user-facing output</div>
+
+  <h3>5.1 End-to-End Architecture</h3>
+
+  <div class="flow-container">
+    <div class="flow-row">
+      <div class="flow-box">
+        <div class="flow-box-title">CMS Dataset</div>
+        <div class="flow-box-sub">Medicare_Quarterly_Part_B_Spending_by_Drug_Q3_2025.csv · 1,759 rows · 10 columns</div>
+      </div>
+    </div>
+    <div class="flow-arrow-down">↓</div>
+    <div class="flow-label">Backend Startup (lifespan event)</div>
+    <div class="flow-arrow-down">↓</div>
+
+    <div class="flow-row">
+      <div class="flow-box indigo">
+        <div class="flow-box-title">data_pipeline.py</div>
+        <div class="flow-box-sub">Clean · Merge · Derive metrics · Variance flags · Discount tiers</div>
+      </div>
+    </div>
+    <div class="flow-arrow-down">↓</div>
+    <div class="flow-label">Parallel model execution</div>
+    <div class="flow-arrow-down">↓</div>
+
+    <div class="flow-row">
+      <div class="flow-box indigo">
+        <div class="flow-box-title">Prophet</div>
+        <div class="flow-box-sub">Forecasting model · Top 20 drugs · 2025 projection</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box indigo">
+        <div class="flow-box-title">Isolation Forest</div>
+        <div class="flow-box-sub">Anomaly detection · All drugs · Score 0–1</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box indigo">
+        <div class="flow-box-title">Linear Regression</div>
+        <div class="flow-box-sub">Variance analysis · Residuals · Z-score flags</div>
+      </div>
+    </div>
+    <div class="flow-arrow-down">↓</div>
+    <div class="flow-label">Results stored in in-memory cache (_cache dict)</div>
+    <div class="flow-arrow-down">↓</div>
+
+    <div class="flow-row">
+      <div class="flow-box emerald">
+        <div class="flow-box-title">FastAPI (main.py)</div>
+        <div class="flow-box-sub">8 REST endpoints · CORS · JSON · Pre-computed results served from cache</div>
+      </div>
+    </div>
+    <div class="flow-arrow-down">↓</div>
+    <div class="flow-label">HTTP on port 8000</div>
+    <div class="flow-arrow-down">↓</div>
+
+    <div class="flow-row">
+      <div class="flow-box light">
+        <div class="flow-box-title">React Frontend</div>
+        <div class="flow-box-sub">Dashboard · Variance · Forecast · Anomaly · AI Insights</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box light">
+        <div class="flow-box-title">Recharts</div>
+        <div class="flow-box-sub">Bar · Pie · Line · Area · Composed charts</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box light">
+        <div class="flow-box-title">AI Chat (Groq)</div>
+        <div class="flow-box-sub">LLaMA 3.3 70B · Keyword retrieval · Executive brief</div>
+      </div>
+    </div>
+    <div class="flow-arrow-down">↓</div>
+    <div class="flow-label">User-facing output on port 5173</div>
+    <div class="flow-arrow-down">↓</div>
+
+    <div class="flow-row">
+      <div class="flow-box amber">
+        <div class="flow-box-title">Decision-Grade Output</div>
+        <div class="flow-box-sub">KPIs · Charts · Anomaly flags · Forecasts · AI Q&amp;A · Executive briefs</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>5.2 Data Pipeline Transformation Flow</h3>
+  <p>The following steps are executed sequentially inside <code>data_pipeline.py</code> every time the backend starts:</p>
+  <ol>
+    <li><strong>Load CSV:</strong> Read the 1,759-row CMS file from <code>backend/data/</code> using a relative path.</li>
+    <li><strong>Strip whitespace:</strong> Normalise all string columns to prevent merge failures from trailing spaces.</li>
+    <li><strong>Create drug_key:</strong> Cast HCPCS_Cd to string — used as the unique identifier throughout the platform.</li>
+    <li><strong>Year split:</strong> Separate into df_2024 (~880 rows) and df_2025 (~879 rows) on the Year column.</li>
+    <li><strong>Inner merge:</strong> Join on drug_key to produce df_merged — only drugs present in both years, with _2024 and _2025 column suffixes.</li>
+    <li><strong>Derived metrics:</strong> Compute spend_change_abs, spend_change_pct, cost_per_claim_change_pct, cost_per_bene_change_pct.</li>
+    <li><strong>Variance flags:</strong> Apply high_increase / stable / high_decrease at ±20% spend change threshold.</li>
+    <li><strong>Discount tiers:</strong> Assign WAC-to-ASP discount rate by drug tier using Avg_Spnd_Per_Clm_2024 as proxy; compute estimated_market_discount_2024 and estimated_net_asp_cost_2024.</li>
+  </ol>
+
+  <h3>5.3 API Endpoint Reference</h3>
+  <table>
+    <thead><tr><th>Endpoint</th><th>Method</th><th>Source</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>/api/summary</td><td>GET</td><td>Cache</td><td>Portfolio-level KPIs: total spend, YoY change, drug count, concentration</td></tr>
+      <tr><td>/api/top-drugs</td><td>GET</td><td>Cache</td><td>Top 20 drugs by 2024 spend with all derived metrics and discount estimates</td></tr>
+      <tr><td>/api/variance</td><td>GET</td><td>Cache</td><td>Full variance table: all drugs with model residuals, z-scores, and flags</td></tr>
+      <tr><td>/api/forecast</td><td>GET</td><td>Cache</td><td>Prophet forecast results for top 20 drugs — projected spend and CI bands</td></tr>
+      <tr><td>/api/anomalies</td><td>GET</td><td>Cache</td><td>Top 50 drugs by anomaly score with reasons and financial metrics</td></tr>
+      <tr><td>/api/ask</td><td>POST</td><td>Live (Groq)</td><td>Natural language Q&amp;A — keyword retrieval + LLaMA 3.3 70B response</td></tr>
+      <tr><td>/api/brief</td><td>POST</td><td>Live (Groq)</td><td>Generates a structured executive brief using full model output context</td></tr>
+      <tr><td>/api/test-groq</td><td>GET</td><td>Live (Groq)</td><td>Diagnostic endpoint — confirms Groq API connectivity</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>ClaimIQ — Medicare Intelligence Platform</span>
+    <span>§5 System Architecture</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ §6 MODEL EXPLANATIONS ═══════════════════════════════════════ -->
+<div class="page">
+  <div class="section-tag">Section 6</div>
+  <div class="section-number">06</div>
+  <div class="section-title">Model Explanations</div>
+  <div class="section-sub">How each model works, why it was chosen, and how it is applied</div>
+
+  <div class="model-card">
+    <div class="model-card-header">
+      <h3>6.1 Prophet — Time Series Forecasting</h3>
+      <span class="model-badge">FORECASTING</span>
+    </div>
+    <div class="model-card-body">
+      <p>Prophet is an open-source time series forecasting library developed by Meta. It is designed for business time series that exhibit non-linear trends with strong seasonality, and it is robust to missing data and outliers.</p>
+      <h4>Why Prophet for this dataset?</h4>
+      <p>The CMS dataset provides only two annual data points per drug — 2024 full year and 2025 Q1–Q3 partial year. Traditional ARIMA or LSTM models require significantly more historical data points. Prophet can fit a meaningful trend line on two points and extrapolate forward, making it the practical choice for this data structure.</p>
+      <h4>How it is applied</h4>
+      <ol>
+        <li><strong>Annualisation:</strong> 2025 Q1–Q3 spend is multiplied by (12/9) to create a full-year equivalent, providing two comparable annual data points.</li>
+        <li><strong>Prophet DataFrame:</strong> A 2-row dataset is prepared per drug with ds = ['2024-12-31', '2025-09-30'] and y = [actual_2024_spend, actual_2025_spend].</li>
+        <li><strong>Seasonality disabled:</strong> yearly_seasonality=False, weekly_seasonality=False, daily_seasonality=False — because with only two annual points, no seasonality pattern can be estimated.</li>
+        <li><strong>Forecast horizon:</strong> 3 quarterly periods forward from the last data point to project end-of-2025 spend.</li>
+        <li><strong>Outputs:</strong> yhat (point projection), yhat_lower, yhat_upper (80% confidence interval), growth_rate_pct vs 2024.</li>
+      </ol>
+      <div class="model-meta-grid">
+        <div class="model-meta-item">
+          <div class="model-meta-label">Library</div>
+          <div class="model-meta-value">prophet (Meta / PyPI)</div>
+        </div>
+        <div class="model-meta-item">
+          <div class="model-meta-label">Drugs Covered</div>
+          <div class="model-meta-value">Top 20 by 2024 spend</div>
+        </div>
+        <div class="model-meta-item">
+          <div class="model-meta-label">Seasonality</div>
+          <div class="model-meta-value">Disabled (insufficient history)</div>
+        </div>
+        <div class="model-meta-item">
+          <div class="model-meta-label">Confidence Interval</div>
+          <div class="model-meta-value">80% — yhat_lower to yhat_upper</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="model-card">
+    <div class="model-card-header">
+      <h3>6.2 Isolation Forest — Anomaly Detection</h3>
+      <span class="model-badge">ANOMALY DETECTION</span>
+    </div>
+    <div class="model-card-body">
+      <p>Isolation Forest is an unsupervised machine learning algorithm that identifies anomalies by measuring how easily a data point can be isolated from the rest of the population. Anomalous points — those that are unusual in their combination of features — are isolated with fewer random splits and receive a lower decision function score.</p>
+      <h4>Why Isolation Forest for drug spend?</h4>
+      <p>Drug spend data is highly skewed — a small number of specialty biologics dominate spend while thousands of lower-cost drugs form a long tail. Standard statistical methods (e.g. standard deviation thresholds) fail in this distribution. Isolation Forest is specifically designed for high-dimensional, skewed datasets and does not assume a normal distribution.</p>
+      <h4>How it is applied</h4>
+      <ol>
+        <li><strong>Feature set (5 variables):</strong> Tot_Spndng, Tot_Clms, Tot_Benes, Avg_Spnd_Per_Clm, Avg_Spnd_Per_Bene — all from the 2024 dataset.</li>
+        <li><strong>StandardScaler:</strong> All features are z-scored before fitting. This is mandatory because Isolation Forest is scale-sensitive — without scaling, Tot_Spndng (billions) would dominate Avg_Spnd_Per_Clm (hundreds).</li>
+        <li><strong>Model parameters:</strong> n_estimators=100, contamination=0.05 (expect 5% of drugs to be anomalous), random_state=42.</li>
+        <li><strong>Score inversion:</strong> decision_function() returns higher values for normal points. Scores are inverted and normalised to 0–1 so that 1 = most anomalous.</li>
+        <li><strong>Reason generation:</strong> Plain-English anomaly reasons are generated using percentile thresholds: extreme cost per claim (&gt; 99th percentile), unusually high claims per patient (&gt; 95th percentile ratio), high spend in few patients (&gt; 95th spend &amp; &lt; 25th beneficiary count).</li>
+      </ol>
+      <div class="model-meta-grid">
+        <div class="model-meta-item">
+          <div class="model-meta-label">Library</div>
+          <div class="model-meta-value">scikit-learn IsolationForest</div>
+        </div>
+        <div class="model-meta-item">
+          <div class="model-meta-label">Contamination</div>
+          <div class="model-meta-value">5% (expected anomaly rate)</div>
+        </div>
+        <div class="model-meta-item">
+          <div class="model-meta-label">n_estimators</div>
+          <div class="model-meta-value">100 trees</div>
+        </div>
+        <div class="model-meta-item">
+          <div class="model-meta-label">Random State</div>
+          <div class="model-meta-value">42 (reproducible results)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="model-card">
+    <div class="model-card-header">
+      <h3>6.3 Linear Regression — Variance Analysis</h3>
+      <span class="model-badge">VARIANCE ANALYSIS</span>
+    </div>
+    <div class="model-card-body">
+      <p>The variance analysis module uses ordinary least squares linear regression to establish a baseline expectation for 2025 drug spend based on each drug's 2024 financial profile. Drugs that deviate significantly from this expectation are flagged as "above" or "below" model expectation — a signal that goes beyond simple percentage change.</p>
+      <h4>Why regression-based variance?</h4>
+      <p>Simple year-over-year percentage change has a limitation: a drug that grows 25% but had low 2024 volume is very different from a drug that grows 25% at $500M in spend. Linear regression accounts for the relationship between a drug's 2024 claims volume, cost per claim, and beneficiary count to predict where 2025 spend should land — then surfaces the drugs that deviate most from that prediction.</p>
+      <h4>How it is applied</h4>
+      <ol>
+        <li><strong>Features:</strong> Tot_Clms_2024, Avg_Spnd_Per_Clm_2024, Tot_Benes_2024.</li>
+        <li><strong>Target:</strong> Tot_Spndng_2025.</li>
+        <li><strong>Fit:</strong> sklearn LinearRegression on the merged dataset.</li>
+        <li><strong>Residuals:</strong> model_residual = actual_2025 − predicted_2025.</li>
+        <li><strong>Z-scoring:</strong> Residuals are standardised (residual_zscore). |z| &gt; 2 is flagged as significant variance — approximately the top/bottom 5% of deviations.</li>
+        <li><strong>Labels:</strong> "Above expectation" (z &gt; 2), "Below expectation" (z &lt; −2), "As expected" otherwise.</li>
+      </ol>
+      <div class="model-meta-grid">
+        <div class="model-meta-item">
+          <div class="model-meta-label">Library</div>
+          <div class="model-meta-value">scikit-learn LinearRegression</div>
+        </div>
+        <div class="model-meta-item">
+          <div class="model-meta-label">Flag Threshold</div>
+          <div class="model-meta-value">|z-score| &gt; 2 (±2σ)</div>
+        </div>
+        <div class="model-meta-item">
+          <div class="model-meta-label">Features</div>
+          <div class="model-meta-value">Claims, Cost/Claim, Beneficiaries</div>
+        </div>
+        <div class="model-meta-item">
+          <div class="model-meta-label">Target</div>
+          <div class="model-meta-value">2025 YTD Spend</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="model-card">
+    <div class="model-card-header">
+      <h3>6.4 WAC-to-ASP Market Discount Methodology</h3>
+      <span class="model-badge">FINANCIAL METHODOLOGY</span>
+    </div>
+    <div class="model-card-body">
+      <p>The CMS dataset does not contain rebate data. Medicare Part B reimburses providers at Average Sales Price (ASP) + 6% — ASP already reflects market discounts negotiated between manufacturers and all their customers. What the platform estimates is the <strong>WAC-to-ASP differential</strong>: the gap between a drug's list price (Wholesale Acquisition Cost) and the actual transaction price (ASP) that CMS uses for reimbursement.</p>
+
+      <div class="method-row header">
+        <span>Drug Tier</span>
+        <span>Threshold (Cost/Claim)</span>
+        <span>Discount Rate</span>
+        <span>Source</span>
+      </div>
+      <div class="method-row">
+        <span>Specialty Biologic</span>
+        <span>&gt; $10,000/claim</span>
+        <span><strong>25%</strong></span>
+        <span>MedPAC March 2023 Report, Ch.5 — biologics avg 22–28% WAC-to-ASP discount</span>
+      </div>
+      <div class="method-row">
+        <span>Brand Drug</span>
+        <span>$1,000 – $10,000/claim</span>
+        <span><strong>20%</strong></span>
+        <span>MedPAC March 2023 Report — brand drugs avg 18–23% WAC-to-ASP discount</span>
+      </div>
+      <div class="method-row">
+        <span>Generic / Low-Cost</span>
+        <span>&lt; $1,000/claim</span>
+        <span><strong>3%</strong></span>
+        <span>MedPAC March 2023 — generics 2–5%; ASP already competitive</span>
+      </div>
+
+      <div class="warning" style="margin-top:16px;">
+        <p><strong>Important:</strong> These discounts are already embedded in the ASP-based spending figures shown in the dataset. The "Net ASP Cost" and "WAC-ASP Discount" chart shows the estimated WAC list price decomposition — not an additional rebate on top of what CMS paid.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>ClaimIQ — Medicare Intelligence Platform</span>
+    <span>§6 Model Explanations</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ §7 RESULTS SUMMARY ═══════════════════════════════════════ -->
+<div class="page">
+  <div class="section-tag">Section 7</div>
+  <div class="section-number">07</div>
+  <div class="section-title">Results Summary</div>
+  <div class="section-sub">Portfolio-level findings, model outputs, and recommended actions</div>
+
+  <h3>7.1 Portfolio-Level Findings</h3>
+  <p>
+    The CMS dataset captures Medicare Part B drug spending across approximately 880 unique drugs appearing in both 2024 and 2025. The portfolio exhibits characteristics typical of specialty-dominated drug spend: a small number of high-cost biologics drive the majority of program dollars, while a long tail of lower-cost drugs accounts for the majority of claim volume.
+  </p>
+  <ul>
+    <li><strong>Spend concentration is high:</strong> The top 10 drugs by 2024 spend account for a significant majority of total Medicare Part B drug expenditure — a structural portfolio risk if any single drug faces formulary disruption, indication expansion, or pricing change.</li>
+    <li><strong>Year-over-year trend:</strong> 2025 Q1–Q3 partial-year spend, when compared to the equivalent 2024 period, reflects ongoing growth in specialty biologic utilisation — consistent with CMS and MedPAC national trend data.</li>
+    <li><strong>Cost per claim divergence:</strong> Average cost per claim varies by several orders of magnitude across the portfolio — from under $100 for generic injectables to over $100,000 for rare disease biologics — confirming the need for tier-based financial management.</li>
+  </ul>
+
+  <h3>7.2 Model Outputs and Risk Signals</h3>
+  <table>
+    <thead><tr><th>Module</th><th>Output</th><th>Risk Signal</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Forecasting (Prophet)</td>
+        <td>Full-year 2025 projections for top 20 drugs with confidence intervals</td>
+        <td>Drugs with wide CI bands indicate high forecast uncertainty — elevated budget risk</td>
+      </tr>
+      <tr>
+        <td>Anomaly Detection (Isolation Forest)</td>
+        <td>0–1 risk score for all drugs; top 5% flagged with plain-English reason</td>
+        <td>Drugs scoring &gt;0.8 show extreme cost per claim or high spend concentrated in very few patients — prime targets for utilisation management</td>
+      </tr>
+      <tr>
+        <td>Variance Analysis (Linear Regression)</td>
+        <td>Model-predicted 2025 spend vs actual; z-score residuals for all drugs</td>
+        <td>Drugs flagged "above expectation" (z &gt; 2) are spending significantly more than their 2024 profile would predict — unexplained growth requiring clinical review</td>
+      </tr>
+      <tr>
+        <td>Variance Flags (Rule-based)</td>
+        <td>High increase / stable / high decrease classification across all drugs</td>
+        <td>High-increase drugs in the top-spend tier represent the highest combined financial and clinical risk</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>7.3 Recommended Actions</h3>
+  <ol>
+    <li>
+      <strong>Prioritise utilisation management review for anomaly-flagged top spenders.</strong>
+      Drugs that appear in both the top-20 by spend AND the top-10 anomaly list represent the highest financial risk. These drugs should be the first candidates for PA (prior authorisation) review, step therapy requirements, or preferred product substitution analysis.
+    </li>
+    <li>
+      <strong>Flag high-increase drugs for contract renegotiation or biosimilar analysis.</strong>
+      Drugs with &gt;20% YoY spend increase that also exceed model expectation (z &gt; 2) are likely experiencing indication expansion or pricing drift. These are prime candidates for value-based contract discussions or biosimilar transition planning where applicable.
+    </li>
+    <li>
+      <strong>Use forecast confidence bands to size budget reserves.</strong>
+      For the top 5 drugs by projected 2025 spend, the width of the Prophet confidence interval (yhat_upper − yhat_lower) quantifies forecast uncertainty. Finance teams should hold reserves proportional to this band rather than using point estimates for budget planning.
+    </li>
+    <li>
+      <strong>Investigate concentration risk.</strong>
+      A portfolio where 10 drugs represent the majority of total spend is exposed to significant volatility risk. Any formulary disruption, FDA safety action, or biosimilar entry for a top-3 drug would materially impact program spend. Scenario modelling for these events is recommended.
+    </li>
+    <li>
+      <strong>Validate WAC-to-ASP discount capture against actual contract terms.</strong>
+      The estimated market discounts in this platform are based on MedPAC aggregate benchmarks. Actual contracted rates will differ by plan and manufacturer. Finance teams should overlay actual contract discount data to refine the net cost estimates.
+    </li>
+  </ol>
+
+  <div class="callout">
+    <div class="callout-title">Platform Summary</div>
+    <p>ClaimIQ demonstrates that the combination of a clean data pipeline, three complementary analytical models, and an AI conversational layer can replace the manual quarterly drug spend analysis workflow with a dashboard any CFO can open and act on immediately — with full methodological transparency and zero black-box outputs.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>ClaimIQ — Medicare Intelligence Platform</span>
+    <span>§7 Results Summary · End of Document</span>
+  </div>
+</div>
+
+</body>
+</html>
